@@ -5,28 +5,6 @@ import 'package:meta/meta.dart';
 
 part 'config.g.dart';
 
-@JsonSerializable(
-  anyMap: true,
-  checked: true,
-  disallowUnrecognizedKeys: true,
-  explicitToJson: true,
-)
-@CopyWith()
-@immutable
-class ConfigCollection {
-  const ConfigCollection({
-    required this.configurations,
-  });
-
-  factory ConfigCollection.fromJson(Map json) =>
-      _$ConfigCollectionFromJson(json);
-  Map<String, dynamic> toJson() => _$ConfigCollectionToJson(this);
-
-  /// List configurations.
-  @JsonKey(required: true)
-  final Map<String, Configuration> configurations;
-}
-
 /// Configuration used for the builder.
 @JsonSerializable(
   anyMap: true,

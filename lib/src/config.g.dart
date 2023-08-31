@@ -6,57 +6,6 @@ part of 'config.dart';
 // CopyWithGenerator
 // **************************************************************************
 
-abstract class _$ConfigCollectionCWProxy {
-  ConfigCollection configurations(Map<String, Configuration> configurations);
-
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ConfigCollection(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
-  ///
-  /// Usage
-  /// ```dart
-  /// ConfigCollection(...).copyWith(id: 12, name: "My name")
-  /// ````
-  ConfigCollection call({
-    Map<String, Configuration>? configurations,
-  });
-}
-
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfConfigCollection.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfConfigCollection.copyWith.fieldName(...)`
-class _$ConfigCollectionCWProxyImpl implements _$ConfigCollectionCWProxy {
-  const _$ConfigCollectionCWProxyImpl(this._value);
-
-  final ConfigCollection _value;
-
-  @override
-  ConfigCollection configurations(Map<String, Configuration> configurations) =>
-      this(configurations: configurations);
-
-  @override
-
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ConfigCollection(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
-  ///
-  /// Usage
-  /// ```dart
-  /// ConfigCollection(...).copyWith(id: 12, name: "My name")
-  /// ````
-  ConfigCollection call({
-    Object? configurations = const $CopyWithPlaceholder(),
-  }) {
-    return ConfigCollection(
-      configurations: configurations == const $CopyWithPlaceholder() ||
-              configurations == null
-          ? _value.configurations
-          // ignore: cast_nullable_to_non_nullable
-          : configurations as Map<String, Configuration>,
-    );
-  }
-}
-
-extension $ConfigCollectionCopyWith on ConfigCollection {
-  /// Returns a callable class that can be used as follows: `instanceOfConfigCollection.copyWith(...)` or like so:`instanceOfConfigCollection.copyWith.fieldName(...)`.
-  // ignore: library_private_types_in_public_api
-  _$ConfigCollectionCWProxy get copyWith => _$ConfigCollectionCWProxyImpl(this);
-}
-
 abstract class _$ConfigurationCWProxy {
   Configuration commitHash(String commitHash);
 
@@ -158,33 +107,6 @@ extension $ConfigurationCopyWith on Configuration {
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
-
-ConfigCollection _$ConfigCollectionFromJson(Map json) => $checkedCreate(
-      'ConfigCollection',
-      json,
-      ($checkedConvert) {
-        $checkKeys(
-          json,
-          allowedKeys: const ['configurations'],
-          requiredKeys: const ['configurations'],
-        );
-        final val = ConfigCollection(
-          configurations: $checkedConvert(
-              'configurations',
-              (v) => (v as Map).map(
-                    (k, e) =>
-                        MapEntry(k as String, Configuration.fromJson(e as Map)),
-                  )),
-        );
-        return val;
-      },
-    );
-
-Map<String, dynamic> _$ConfigCollectionToJson(ConfigCollection instance) =>
-    <String, dynamic>{
-      'configurations':
-          instance.configurations.map((k, e) => MapEntry(k, e.toJson())),
-    };
 
 Configuration _$ConfigurationFromJson(Map json) => $checkedCreate(
       'Configuration',
