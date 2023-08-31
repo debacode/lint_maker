@@ -1,4 +1,11 @@
 analyzer:
+  language:
+    strict-casts: true
+  errors:
+    flutter_style_todos: ignore
+    todo: ignore
+  exclude:
+    - "**.g.dart"
 linter:
   rules:
     - always_declare_return_types: true
