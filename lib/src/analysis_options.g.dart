@@ -140,7 +140,7 @@ extension $AnalyzerOptionsCopyWith on AnalyzerOptions {
 }
 
 abstract class _$LinterOptionsCWProxy {
-  LinterOptions rules(List<Object>? rules);
+  LinterOptions rules(Object? rules);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `LinterOptions(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -149,7 +149,7 @@ abstract class _$LinterOptionsCWProxy {
   /// LinterOptions(...).copyWith(id: 12, name: "My name")
   /// ````
   LinterOptions call({
-    List<Object>? rules,
+    Object? rules,
   });
 }
 
@@ -160,7 +160,7 @@ class _$LinterOptionsCWProxyImpl implements _$LinterOptionsCWProxy {
   final LinterOptions _value;
 
   @override
-  LinterOptions rules(List<Object>? rules) => this(rules: rules);
+  LinterOptions rules(Object? rules) => this(rules: rules);
 
   @override
 
@@ -177,7 +177,7 @@ class _$LinterOptionsCWProxyImpl implements _$LinterOptionsCWProxy {
       rules: rules == const $CopyWithPlaceholder()
           ? _value.rules
           // ignore: cast_nullable_to_non_nullable
-          : rules as List<Object>?,
+          : rules as Object?,
     );
   }
 }
@@ -258,8 +258,7 @@ LinterOptions _$LinterOptionsFromJson(Map json) => $checkedCreate(
           allowedKeys: const ['rules'],
         );
         final val = LinterOptions(
-          rules: $checkedConvert('rules',
-              (v) => (v as List<dynamic>?)?.map((e) => e as Object).toList()),
+          rules: $checkedConvert('rules', (v) => v),
         );
         return val;
       },

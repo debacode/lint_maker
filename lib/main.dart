@@ -5,7 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:json2yaml/json2yaml.dart';
 import 'package:lint_maker/src/analysis_options.dart';
 import 'package:lint_maker/src/config.dart';
+import 'package:meta/meta.dart';
 
+/// Path for the [Configuration] file.
+@internal
 const configPath = 'lint_maker.yaml';
 
 Future main(List<String> arguments) async {
@@ -25,14 +28,12 @@ Future main(List<String> arguments) async {
   try {
     configCollection = checkedYamlDecode(
       yamlContent,
-      (m) {
-        return m!.map(
-          (name, value) => MapEntry(
-            name as String,
-            Configuration.fromJson(value! as Map),
-          ),
-        );
-      },
+      (m) => m!.map(
+        (name, value) => MapEntry(
+          name as String,
+          Configuration.fromJson(value! as Map),
+        ),
+      ),
       sourceUrl: file.uri,
     );
   } on ParsedYamlException catch (e) {

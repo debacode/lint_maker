@@ -44,7 +44,8 @@ class Configuration {
 
   /// Linting rules to exclude from the list.
   ///
-  /// This can be useful when you work with an older dart version not supporting the newer rules yet.
+  /// This can be useful when you work with an older dart version not supporting
+  /// the newer rules yet.
   final List<String> excludedRules;
 
   /// Preset options.
