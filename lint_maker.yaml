@@ -1,0 +1,13 @@
+dart:
+  commitHash: 7f40f11
+  disabledRules:
+    - always_specify_types
+    - avoid_as
+    - avoid_final_parameters
+    - avoid_print
+    - diagnostic_describe_all_properties
+    - no_default_cases
+    - one_member_abstracts
+    - prefer_double_quotes
+    - prefer_relative_imports
+    - unnecessary_final
