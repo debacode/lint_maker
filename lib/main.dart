@@ -52,14 +52,14 @@ Future main(List<String> arguments) async {
       sourceUrl: lintsUri,
     );
 
-    final List<Map<String, bool>> rules = [];
+    final rules = <String, bool>{};
 
     if (options.linter?.rules != null) {
-      for (final line in options.linter!.rules!) {
+      for (final line in options.linter!.rules! as List) {
         final excluded = config.excludedRules.contains(line);
         if (!excluded) {
           final disabled = config.disabledRules.contains(line);
-          rules.add({line as String: !disabled});
+          rules[line as String] = !disabled;
         }
       }
     }

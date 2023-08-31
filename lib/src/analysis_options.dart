@@ -70,7 +70,7 @@ class LinterOptions {
   factory LinterOptions.fromJson(Map json) => _$LinterOptionsFromJson(json);
   Map<String, dynamic> toJson() => _$LinterOptionsToJson(this);
 
-  final List<Object>? rules;
+  final Object? rules;
 
   @override
   String toString() => 'LinterOptions: ${toJson()}';
