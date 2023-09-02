@@ -43,7 +43,7 @@ Future main(List<String> arguments) async {
 
   for (final config in configCollection.values) {
     final lintsUri = Uri.parse(
-      'https://raw.githubusercontent.com/dart-lang/linter/${config.commitHash}/example/all.yaml',
+      'https://raw.githubusercontent.com/dart-lang/sdk/${config.commitHash}/pkg/linter/example/all.yaml',
     );
 
     final result = await http.get(lintsUri);

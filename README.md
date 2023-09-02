@@ -6,7 +6,7 @@ Add lint_maker to your dev dependencies and create a `lint_maker.yaml` file in t
 The config can look something like:
 ```yaml
 name: # name of the config
-  commitHash: 7f40f11 # commitHash of the https://github.com/dart-lang/linter package to use as a base
+  commitHash: 0a567d0 # commitHash of the https://github.com/dart-lang/linter package to use as a base
   output: "analysis_options.yaml" # output file
   disabledRules: # disable rules
     - always_specify_types

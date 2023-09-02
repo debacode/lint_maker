@@ -1,5 +1,5 @@
 dart:
-  commitHash: 7f40f11
+  commitHash: 0a567d0
   disabledRules:
     - always_specify_types
     - avoid_annotating_with_dynamic
