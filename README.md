@@ -1,5 +1,5 @@
 Custom linting maker. Creates analysis_options.yaml files to your liking.
-This package is useful if you want to either create your own linting package or jsut add a custom analysis_options.yaml file to your project.
+This package is useful if you want to either create your own linting package or just add a custom analysis_options.yaml file to your project.
 
 ## Setup:
 Add lint_maker to your dev dependencies and create a `lint_maker.yaml` file in the root of your project.

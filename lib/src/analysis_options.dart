@@ -14,16 +14,16 @@ part 'analysis_options.g.dart';
 @CopyWith()
 @immutable
 class AnalysisOptions {
-  /// creates a new analisis options configuration.
+  /// creates a new analysis options configuration.
   const AnalysisOptions({
     this.analyzer,
     this.linter,
   });
 
-  /// Creates a new analisis options configuration from a [json] map.
+  /// Creates a new analysis options configuration from a [json] map.
   factory AnalysisOptions.fromJson(Map json) => _$AnalysisOptionsFromJson(json);
 
-  /// Parses this analisis options configuration into json
+  /// Parses this analysis options configuration into json
   Map<String, dynamic> toJson() => _$AnalysisOptionsToJson(this);
 
   /// Analyzer settings.
