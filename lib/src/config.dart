@@ -24,7 +24,7 @@ class Configuration {
     this.preset = const AnalysisOptions(),
   });
 
-  /// Creates a new configuratin from a [json] map.
+  /// Creates a new configuration from a [json] map.
   factory Configuration.fromJson(Map json) => _$ConfigurationFromJson(json);
 
   /// Parses this configuration into json

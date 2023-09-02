@@ -37,7 +37,7 @@ Future main(List<String> arguments) async {
       sourceUrl: file.uri,
     );
   } on ParsedYamlException catch (e) {
-    print('An error occured: $e');
+    print('An error occurred: $e');
     return;
   }
 
