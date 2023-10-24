@@ -17,7 +17,8 @@ const String _allLintsUrl =
 const String _lintsVersionUrl =
     'https://raw.githubusercontent.com/dart-lang/sdk/main/pkg/linter/tool/since/sdk.yaml';
 
-Future<void> main(List<String> arguments) async {
+/// Runs the lint maker utility.
+Future<void> runLintMaker() async {
   final file = File(_configPath);
 
   final configCollection = <String, Configuration>{};

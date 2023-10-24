@@ -1,5 +1,5 @@
-import 'package:lint_maker/main.dart' as lint_maker;
+import 'package:lint_maker/src/lint_maker.dart' as lint_maker;
 
 Future<void> main(List<String> args) async {
-  await lint_maker.main(args);
+  await lint_maker.runLintMaker();
 }
