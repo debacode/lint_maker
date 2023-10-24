@@ -1,22 +1,23 @@
-dart:
-  commitHash: 0a567d0
-  disabledRules:
-    - always_specify_types
-    - avoid_annotating_with_dynamic
-    - avoid_as
-    - avoid_print
-    - diagnostic_describe_all_properties
-    - prefer_double_quotes
-    - prefer_relative_imports
-    - unnecessary_final
-    - prefer_final_parameters
-    - prefer_expression_function_bodie
+default:
+  output: "analysis_options.yaml"
   preset:
     analyzer:
       language:
         strict-casts: true
-      errors:
-        flutter_style_todos: ignore
-        todo: ignore
+        strict-inference: true
+        strict-raw-types: true
       exclude:
         - "**.g.dart"
+    linter:
+      rules:
+        - always_specify_types
+        - avoid_annotating_with_dynamic
+        - avoid_as
+        - avoid_print
+        - diagnostic_describe_all_properties
+        - prefer_double_quotes
+        - prefer_relative_imports
+        - unnecessary_final
+        - prefer_final_parameters
+        - prefer_expression_function_bodies
+        - avoid_catches_without_on_clauses
