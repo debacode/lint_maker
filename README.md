@@ -1,3 +1,4 @@
+# Dart lint maker
 Custom linting maker. Creates analysis_options.yaml files to your liking.
 This package is useful if you want to either create your own linting package or just add a custom analysis_options.yaml file to your project.
 
