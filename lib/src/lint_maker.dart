@@ -77,7 +77,7 @@ Future<void> runLintMaker() async {
     final allRules = (defaults['linter'] as YamlMap)['rules'] as YamlNode;
     final disabledRules = (overrides['linter']! as Map)['rules'] as YamlNode;
 
-    final rules = <String, Object>{}
+    final rules = <String, Object?>{}
       ..addEntries(_yamlNodeEntries(allRules, true))
       ..addEntries(_yamlNodeEntries(disabledRules, false))
       ..removeWhere((key, value) => unsupportedRules.contains(key));
@@ -89,20 +89,23 @@ Future<void> runLintMaker() async {
   }
 }
 
-Iterable<MapEntry<String, Object>> _yamlNodeEntries(
+Iterable<MapEntry<String, Object?>> _yamlNodeEntries(
   YamlNode rules,
   Object value,
 ) sync* {
-  final ruleList = switch (rules) {
-    YamlList() => rules.nodes,
-    YamlMap() => rules.nodes.cast<YamlNode, YamlNode>().keys,
-    _ => throw ArgumentError(
+  switch (rules) {
+    case YamlList():
+      for (final element in rules.nodes) {
+        yield MapEntry(element.value.toString(), true);
+      }
+    case YamlMap():
+      for (final element in rules.nodes.cast<YamlNode, YamlNode>().entries) {
+        yield MapEntry(element.key.value.toString(), element.value.value);
+      }
+    default:
+      throw ArgumentError(
         'Can not wor with the node type ${rules.runtimeType}',
-      ),
-  };
-
-  for (final element in ruleList) {
-    yield MapEntry(element.value.toString(), value);
+      );
   }
 }
 
