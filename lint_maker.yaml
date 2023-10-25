@@ -10,14 +10,14 @@ default:
         - "**.g.dart"
     linter:
       rules:
-        - always_specify_types
-        - avoid_annotating_with_dynamic
-        - avoid_as
-        - avoid_print
-        - diagnostic_describe_all_properties
-        - prefer_double_quotes
-        - prefer_relative_imports
-        - unnecessary_final
-        - prefer_final_parameters
-        - prefer_expression_function_bodies
-        - avoid_catches_without_on_clauses
+        always_specify_types: false
+        avoid_annotating_with_dynamic: false
+        avoid_as: false
+        avoid_print: false
+        diagnostic_describe_all_properties: false
+        prefer_double_quotes: false
+        prefer_relative_imports: false
+        unnecessary_final: false
+        prefer_final_parameters: false
+        prefer_expression_function_bodies: false
+        avoid_catches_without_on_clauses: false

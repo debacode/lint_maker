@@ -17,7 +17,7 @@ name: # internal name of the config
       exclude:
         - "**.g.dart"
     linter:
-      rules: # All rules specified here wether true or false will be disabled
+      rules:
         always_specify_types: false
         avoid_annotating_with_dynamic: false
         avoid_as: false
