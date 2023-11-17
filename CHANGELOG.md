@@ -1,3 +1,8 @@
+## 0.2.0+1
+
+- Finish migration to the Debacode organization
+- add CI
+
 ## 0.2.0
 
 - Add example to the package
