@@ -1,0 +1,47 @@
+image: dart:stable-sdk
+
+stages:
+  - lint
+  - test
+
+codespell:
+  stage: lint
+  image:
+    name: $CI_REGISTRY/tools/cspell:latest
+  script:
+    - cspell .
+
+analyze:
+  stage: lint
+  script:
+    - dart pub get
+    - dart analyze # analyzer linting rules
+    - dart format . --set-exit-if-changed # dart format
+  only:
+    refs:
+      - merge_requests
+    changes:
+      - lib/**/*.dart
+      - test/**/*.dart
+
+unit_test:
+  stage: test
+  script:
+    - dart pub get
+    - dart test
+  only:
+    refs:
+      - merge_requests
+    changes:
+      - lib/**/*
+      - test/**/*
+
+pana:
+  stage: lint
+  image: ghcr.io/cirruslabs/flutter:stable
+  script:
+    - dart pub get
+    - dart run pana --exit-code-threshold 0
+  only:
+    refs:
+      - merge_requests
