@@ -1,3 +1,8 @@
+## Setup
+
+Add the lint_maker to your dev dependencies and create a `lint_maker.yaml` file in the root of your project.
+The config can look something like:
+```yaml
 default:
   output: "analysis_options.yaml"
   preset:
@@ -21,3 +26,4 @@ default:
         prefer_final_parameters: false
         prefer_expression_function_bodies: false
         avoid_catches_without_on_clauses: false
+```
