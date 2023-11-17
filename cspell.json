@@ -1,0 +1,28 @@
+{
+    "version": "0.2",
+    "language": "en",
+    "useGitignore": true,
+    "words": [
+        "Debacode"
+    ],
+    "ignorePaths": [
+        "**.g.dart",
+        "analysis_options.yaml"
+    ],
+    "dictionaries": [
+        "bash",
+        "dart",
+        "en_US",
+        "misc",
+        "packages",
+        "project",
+        "softwareTerms",
+        "tools"
+    ],
+    "dictionaryDefinitions": [
+        {
+            "name": "tools",
+            "path": ".cspell/tools.txt"
+        }
+    ]
+}
