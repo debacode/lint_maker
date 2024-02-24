@@ -11,10 +11,7 @@ default:
     linter:
       rules:
         always_specify_types: false
-        avoid_annotating_with_dynamic: false
-        avoid_as: false
         avoid_print: false
-        diagnostic_describe_all_properties: false
         prefer_double_quotes: false
         prefer_relative_imports: false
         unnecessary_final: false
