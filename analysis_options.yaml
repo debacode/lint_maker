@@ -13,7 +13,8 @@ linter:
     always_specify_types: false
     always_use_package_imports: true
     annotate_overrides: true
-    avoid_annotating_with_dynamic: false
+    annotate_redeclares: true
+    avoid_annotating_with_dynamic: true
     avoid_bool_literals_in_conditional_expressions: true
     avoid_catches_without_on_clauses: false
     avoid_catching_errors: true
@@ -69,7 +70,7 @@ linter:
     depend_on_referenced_packages: true
     deprecated_consistency: true
     deprecated_member_use_from_same_package: true
-    diagnostic_describe_all_properties: false
+    diagnostic_describe_all_properties: true
     directives_ordering: true
     discarded_futures: true
     do_not_use_environment: true
@@ -103,6 +104,8 @@ linter:
     no_literal_bool_comparisons: true
     no_logic_in_create_state: true
     no_runtimeType_toString: true
+    no_self_assignments: true
+    no_wildcard_variable_uses: true
     non_constant_identifier_names: true
     noop_primitive_operations: true
     null_check_on_nullable_type_parameter: true
@@ -221,4 +224,3 @@ linter:
     use_to_and_as_if_applicable: true
     valid_regexps: true
     void_checks: true
-    avoid_as: false
