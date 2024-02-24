@@ -2,7 +2,7 @@ name: lint_maker
 description: >-
   A script to help you create custom linting configurations.
   Creates analysis_options.yaml files to your liking.
-version: 0.2.0+1
+version: 0.2.1
 repository: https://github.com/debacode/lint_maker
 issue_tracker: https://github.com/debacode/lint_maker/issues
 topics:
@@ -34,3 +34,6 @@ platforms:
   macos:
   web:
   windows:
+
+executables:
+  lint_maker:

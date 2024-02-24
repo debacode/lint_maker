@@ -1,3 +1,6 @@
+## 0.2.1
+- specify `executables` in the pubspec to allow direct invocations from the command line
+
 ## 0.2.0+1
 
 - Finish migration to the Debacode organization
