@@ -1,21 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
-// ignore: implementation_imports
-import 'package:analyzer/src/analysis_options/analysis_options_provider.dart';
 import 'package:checked_yaml/checked_yaml.dart';
-import 'package:http/http.dart' as http;
 import 'package:json2yaml/json2yaml.dart';
 import 'package:lint_maker/src/config.dart';
+import 'package:lint_maker/src/messages_data.dart';
 import 'package:version/version.dart';
 import 'package:yaml/yaml.dart';
 
 const String _configPath = 'lint_maker.yaml';
-
-const String _allLintsUrl =
-    'https://raw.githubusercontent.com/dart-lang/sdk/main/pkg/linter/example/all.yaml';
-const String _lintsVersionUrl =
-    'https://raw.githubusercontent.com/dart-lang/sdk/main/pkg/linter/tool/since/sdk.yaml';
 
 /// Runs the lint maker utility.
 Future<void> runLintMaker() async {
@@ -51,71 +44,37 @@ Future<void> runLintMaker() async {
     }
   }
 
-  final lintsUri = Uri.parse(_allLintsUrl);
-  final versionsUri = Uri.parse(_lintsVersionUrl);
-
-  final lintsResult = await http.get(lintsUri);
-  final defaults = _loadYamlMap(lintsResult.body);
-  final versionsResult = await http.get(versionsUri);
-  final versions = checkedYamlDecode(
-    versionsResult.body,
-    (m) => m!.entries.map(
-      (entry) => (
-        entry.key as String,
-        Version.parse(entry.value as String),
-      ),
-    ),
-  );
-
+  final messagesYaml = await loadMessagesYaml();
   final dartVersion = Version.parse(Platform.version.split(' ').first);
-  final unsupportedRules = versions
-      .where((element) => element.$2 > dartVersion)
-      .map((element) => element.$1);
 
   for (final config in configCollection.values) {
     final overrides = config.preset;
-    final allRules = (defaults['linter'] as YamlMap)['rules'] as YamlNode;
-    final disabledRules = (overrides['linter']! as Map)['rules'] as YamlNode;
+    final disabledRules = (overrides['linter']! as Map)['rules'];
 
-    final rules = <String, Object?>{}
-      ..addEntries(_yamlNodeEntries(allRules, true))
-      ..addEntries(_yamlNodeEntries(disabledRules, false))
-      ..removeWhere((key, value) => unsupportedRules.contains(key));
+    final rules = <String, Object?>{};
+    for (final lintCode in messagesYaml.supportedLintCodes(dartVersion)) {
+      rules[lintCode] = true;
+    }
+
+    switch (disabledRules) {
+      case YamlList(:final nodes):
+        for (final element in nodes) {
+          rules[element.value.toString()] = false;
+        }
+      case YamlMap(:final nodes):
+        for (final MapEntry(key: YamlNode name, value: YamlNode data)
+            in nodes.entries) {
+          rules[name.value.toString()] = data.value;
+        }
+      default:
+        throw ArgumentError(
+          'Can not work with the node type ${rules.runtimeType}',
+        );
+    }
 
     final output = json.decode(json.encode(overrides)) as Map<String, dynamic>;
     (output['linter'] as Map)['rules'] = rules;
 
     File(config.output).writeAsStringSync(json2yaml(output));
-  }
-}
-
-Iterable<MapEntry<String, Object?>> _yamlNodeEntries(
-  YamlNode rules,
-  Object value,
-) sync* {
-  switch (rules) {
-    case YamlList():
-      for (final element in rules.nodes) {
-        yield MapEntry(element.value.toString(), true);
-      }
-    case YamlMap():
-      for (final element in rules.nodes.cast<YamlNode, YamlNode>().entries) {
-        yield MapEntry(element.key.value.toString(), element.value.value);
-      }
-    default:
-      throw ArgumentError(
-        'Can not wor with the node type ${rules.runtimeType}',
-      );
-  }
-}
-
-YamlMap _loadYamlMap(String content) {
-  try {
-    final doc = loadYamlNode(content);
-    return doc is YamlMap ? doc : YamlMap();
-  } on YamlException catch (e) {
-    throw OptionsFormatException(e.message, e.span);
-  } catch (e) {
-    throw OptionsFormatException('Unable to parse YAML document.');
   }
 }

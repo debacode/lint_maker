@@ -1,3 +1,5 @@
+// ignore_for_file: document_ignores
+
 // ignore: implementation_imports
 import 'package:analyzer/src/util/file_paths.dart' as file_paths;
 import 'package:json_annotation/json_annotation.dart';
