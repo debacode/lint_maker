@@ -1,4 +1,9 @@
+## 0.2.2
+
+- fix lint version file being removed from upstream
+
 ## 0.2.1
+
 - specify `executables` in the pubspec to allow direct invocations from the command line
 
 ## 0.2.0+1
