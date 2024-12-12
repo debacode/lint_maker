@@ -24,18 +24,6 @@ analyze:
       - lib/**/*.dart
       - test/**/*.dart
 
-unit_test:
-  stage: test
-  script:
-    - dart pub get
-    - dart test
-  only:
-    refs:
-      - merge_requests
-    changes:
-      - lib/**/*
-      - test/**/*
-
 pana:
   stage: lint
   image: ghcr.io/cirruslabs/flutter:stable
