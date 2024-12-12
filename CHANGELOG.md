@@ -1,3 +1,8 @@
+## 0.2.3
+
+- fix lint version file parsing
+- allow analyzer >7.0.0
+
 ## 0.2.2
 
 - fix lint version file being removed from upstream

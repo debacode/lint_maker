@@ -13,7 +13,7 @@ environment:
   sdk: ">=3.3.0 <4.0.0"
 
 dependencies:
-  analyzer: ">=5.2.0 <7.0.0"
+  analyzer: ">=5.2.0 <8.0.0"
   checked_yaml: ^2.0.3
   http: ^1.0.0
   json2yaml: ^3.0.1
