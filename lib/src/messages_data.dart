@@ -1,65 +1,55 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+import 'package:lint_maker/src/lint_rule.dart';
 import 'package:version/version.dart';
-import 'package:yaml/yaml.dart';
 
 final Uri _messageDataUrl = Uri.parse(
-  'https://raw.githubusercontent.com/dart-lang/sdk/main/pkg/linter/messages.yaml',
+  'https://raw.githubusercontent.com/dart-lang/sdk/main/pkg/linter/tool/machine/rules.json',
 );
 
 /// Loads the lint `messages.yaml` from GitHub.
 Future<MessagesData> loadMessagesYaml() async {
   final lintsResult = await http.get(_messageDataUrl);
 
-  final doc = loadYamlNode(
-    lintsResult.body,
-    sourceUrl: _messageDataUrl,
-  );
-  if (doc is! YamlMap) {
-    throw StateError('messages.yaml is not a map');
+  Object? rules;
+  try {
+    rules = json.decode(lintsResult.body);
+  } catch (e) {
+    throw StateError('can not decode rules.json');
   }
-  return MessagesData(doc);
+
+  if (rules is! List) {
+    throw StateError('can not parse rules.json');
+  }
+
+  final parsed = rules.map((e) {
+    if (e is! Map<String, dynamic>) {
+      throw StateError('can not parse rules.json');
+    }
+
+    return LintRule.fromJson(e);
+  }).toList();
+
+  return MessagesData(parsed);
 }
 
 /// Message data for all lints.
-extension type MessagesData(YamlMap _map) {
-  /// A map containing all lint codes and their data.
-  YamlMap get lintCodes {
-    final lintRuleSection = _map['LintCode'] as YamlMap?;
-    if (lintRuleSection == null) {
-      throw StateError(
-        "Error: 'messages.yaml' does not have a 'LintCode' section.",
-      );
-    }
-    return lintRuleSection;
-  }
-
+extension type MessagesData(List<LintRule> _lintCodes) {
   /// A collection of names of the lint rules compatible with the [dartVersion].
   ///
   /// Only the shared name of a lint code is returned.
   Set<String> supportedLintCodes(Version dartVersion) {
     final result = <String>{};
 
-    for (var MapEntry(key: String name, value: YamlMap data)
-        in lintCodes.entries) {
-      if (data.containsKey('sharedName')) {
-        name = data['sharedName'] as String;
-      }
+    for (final code in _lintCodes) {
+      final addedIn = Version.parse(code.sinceDartSdk);
 
-      Version? addedIn;
-      if (data['addedIn'] case final String addedInString) {
-        addedIn = Version.parse(addedInString);
-      }
-
-      Version? removedIn;
-      if (data['removedIn'] case final String removedInString) {
-        removedIn = Version.parse(removedInString);
-      }
-
-      if (dartVersion < addedIn || dartVersion >= removedIn) {
+      if (dartVersion < addedIn || code.state != 'stable') {
         continue;
       }
 
-      result.add(name);
+      result.add(code.name);
     }
 
     return result;
